@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/data/models/destination_model.dart';
 import 'package:travel_app/presentation/pages/detail_destination_page.dart';
@@ -15,7 +16,7 @@ class DestinationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 260,
-      width: 230,
+      width: 235,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       margin: const EdgeInsets.only(top: 5, bottom: 5, left: 15),
       decoration: BoxDecoration(
@@ -51,7 +52,7 @@ class DestinationCard extends StatelessWidget {
                       alignment: Alignment.topRight,
                       child: Container(
                         height: 30,
-                        width: 60,
+                        width: 61,
                         decoration: const BoxDecoration(
                           color: kWhiteColor,
                           borderRadius: BorderRadius.only(
@@ -97,32 +98,35 @@ class DestinationCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      destination.name,
-                      style: GoogleFonts.poppins(
-                        fontSize: 17,
-                        color: kBlackColor,
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        destination.name,
+                        style: GoogleFonts.poppins(
+                          fontSize: 17.sm,
+                          color: kBlackColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      overflow: TextOverflow.visible,
-                    ),
-                    const SizedBox(
-                      height: 1,
-                    ),
-                    Text(
-                      destination.city,
-                      style: blackStyle.copyWith(
-                        fontWeight: light,
+                      const SizedBox(
+                        height: 1,
                       ),
-                    ),
-                  ],
+                      Text(
+                        destination.city,
+                        style: blackStyle.copyWith(
+                          fontWeight: light,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   height: 40,
                   width: 40,
+                  margin: const EdgeInsets.only(left: 5),
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: kPrimeryColor,

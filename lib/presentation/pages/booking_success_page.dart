@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:travel_app/common/constants.dart';
 import 'package:travel_app/presentation/provider/page_cubit.dart';
 
@@ -14,35 +15,8 @@ class BookingSuccess extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Center(
-            child: Image.asset(
-              'assets/confirmed.png',
-              width: 300,
-            ),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          Text(
-            'Successful',
-            style: defaultStyle.copyWith(
-              fontSize: 28,
-              fontWeight: FontWeight.w800,
-              color: Colors.green,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Text(
-              'Your order was successful, do you want to see the payment details?',
-              style: blackStyle.copyWith(
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            child: LottieBuilder.network(
+                'https://assets6.lottiefiles.com/packages/lf20_b36dyco1.json'),
           ),
           const SizedBox(
             height: 70,

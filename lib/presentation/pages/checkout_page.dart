@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:travel_app/common/constants.dart';
 import 'package:travel_app/data/models/destination_model.dart';
 import 'package:travel_app/data/models/transaction_model.dart';
 import 'package:travel_app/presentation/pages/booking_success_page.dart';
 import 'package:travel_app/presentation/provider/auth_cubit.dart';
-import 'package:travel_app/presentation/provider/destination_cubit.dart';
+import 'package:travel_app/presentation/provider/seat_cubit.dart';
 import 'package:travel_app/presentation/provider/transaction_cubit.dart';
 
 class CheckoutPage extends StatelessWidget {
@@ -20,63 +21,98 @@ class CheckoutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQueryHeiht = MediaQuery.of(context).size.height;
+    final bodyHeight = mediaQueryHeiht - MediaQuery.of(context).padding.top;
     Widget flightStatus() => SafeArea(
           child: Container(
-            padding:
-                const EdgeInsets.only(left: 15, right: 15, top: 25, bottom: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            height: bodyHeight * 0.25,
+            padding: const EdgeInsets.only(
+              left: 15,
+              right: 15,
+              top: 15,
+            ),
+            child: Stack(
               children: [
-                BlocBuilder<DestinationCubit, DestinationState>(
-                  builder: (context, state) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'BTJ',
-                              style: whiteStyle.copyWith(
-                                  fontSize: 40, fontWeight: FontWeight.bold),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    padding: EdgeInsets.only(
+                      left: 11.w,
+                      right: 13.w,
+                    ),
+                    decoration: BoxDecoration(
+                      color: kWhiteColor,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Image.asset(
+                      'assets/back.png',
+                      color: kPrimeryColor,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'BTJ',
+                            style: whiteStyle.copyWith(
+                              fontSize: 40.sm,
+                              fontWeight: FontWeight.bold,
                             ),
-                            Text(
-                              'From',
-                              style: whiteStyle.copyWith(
-                                  fontSize: 14, fontWeight: FontWeight.w300),
+                          ),
+                          Text(
+                            'From',
+                            style: whiteStyle.copyWith(
+                              fontSize: 16.sm,
+                              fontWeight: FontWeight.w300,
                             ),
-                          ],
-                        ),
-                        Container(
-                          height: 100,
+                          ),
+                        ],
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 100.sm,
                           padding: const EdgeInsets.all(5),
                           child: Image.asset(
                             'assets/flight-time-icon.png',
                             color: kWhiteColor,
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              destination.kodeIATA,
-                              style: whiteStyle.copyWith(
-                                fontSize: 40,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            destination.kodeIATA,
+                            style: whiteStyle.copyWith(
+                              fontSize: 40.sm,
+                              fontWeight: FontWeight.bold,
                             ),
-                            Text(
-                              'Fly To',
-                              style: whiteStyle.copyWith(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w300,
-                              ),
+                          ),
+                          Text(
+                            "Fly To",
+                            style: whiteStyle.copyWith(
+                              fontSize: 16.sm,
+                              fontWeight: FontWeight.w300,
                             ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -84,32 +120,26 @@ class CheckoutPage extends StatelessWidget {
         );
 
     Widget informationContent() => Container(
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          height: MediaQuery.of(context).size.height * 0.71,
+          margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
+          padding: EdgeInsets.symmetric(vertical: 10.h),
           width: double.infinity,
+          height: bodyHeight * 0.75,
           decoration: BoxDecoration(
             color: kWhiteColor,
-            borderRadius: BorderRadius.circular(40),
+            borderRadius: BorderRadius.circular(40.r),
           ),
           child: BlocBuilder<AuthCubit, AuthState>(
             builder: (context, state) {
               return Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 25.w, vertical: 20.h),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Align(
-                          alignment: Alignment.topRight,
-                          child: Container(
-                            margin: const EdgeInsets.only(
-                                top: 10, bottom: 5, right: 5),
-                            height: 70,
-                            child: Image.asset('assets/airplane_logo.png'),
-                          ),
-                        ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -123,7 +153,7 @@ class CheckoutPage extends StatelessWidget {
                                   return Text(
                                     state.user.name.toUpperCase(),
                                     style: defaultStyle.copyWith(
-                                      fontSize: 24,
+                                      fontSize: 24.sm,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   );
@@ -131,7 +161,7 @@ class CheckoutPage extends StatelessWidget {
                                   return Text(
                                     'Anonymous',
                                     style: defaultStyle.copyWith(
-                                      fontSize: 24,
+                                      fontSize: 24.sm,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   );
@@ -141,12 +171,12 @@ class CheckoutPage extends StatelessWidget {
                           ],
                         ),
                         Container(
-                          height: 1.5,
-                          margin: const EdgeInsets.only(top: 10, bottom: 20),
+                          height: 1.5.h,
+                          margin: EdgeInsets.only(top: 10.h, bottom: 20.h),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: kPrimeryColor,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
                         ),
                         Row(
@@ -158,14 +188,14 @@ class CheckoutPage extends StatelessWidget {
                                 Text(
                                   'Airport',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 12.sm,
                                     color: kPrimeryColor.withOpacity(0.4),
                                   ),
                                 ),
                                 Text(
                                   destination.airportName,
                                   style: defaultStyle.copyWith(
-                                    fontSize: 11,
+                                    fontSize: 11.sm,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -177,14 +207,14 @@ class CheckoutPage extends StatelessWidget {
                                 Text(
                                   'Traveler',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 12.sm,
                                     color: kPrimeryColor.withOpacity(0.4),
                                   ),
                                 ),
                                 Text(
                                   '${transaction.amountOfTravel} Person',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 14,
+                                    fontSize: 14.sm,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -192,8 +222,8 @@ class CheckoutPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 40,
+                        SizedBox(
+                          height: 20.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -204,7 +234,7 @@ class CheckoutPage extends StatelessWidget {
                                 Text(
                                   'Price',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 12.sm,
                                     color: kPrimeryColor.withOpacity(0.4),
                                   ),
                                 ),
@@ -215,7 +245,7 @@ class CheckoutPage extends StatelessWidget {
                                     decimalDigits: 0,
                                   ).format(transaction.price),
                                   style: defaultStyle.copyWith(
-                                    fontSize: 14,
+                                    fontSize: 14.sm,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -227,7 +257,7 @@ class CheckoutPage extends StatelessWidget {
                                 Text(
                                   'Insurance',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 12.sm,
                                     color: kPrimeryColor.withOpacity(0.4),
                                   ),
                                 ),
@@ -235,11 +265,11 @@ class CheckoutPage extends StatelessWidget {
                                   transaction.insurance ? "YES" : "NO",
                                   style: transaction.insurance
                                       ? defaultStyle.copyWith(
-                                          fontSize: 14,
+                                          fontSize: 14.sm,
                                           fontWeight: FontWeight.w600,
                                         )
                                       : secondaryStyle.copyWith(
-                                          fontSize: 14,
+                                          fontSize: 14.sm,
                                           fontWeight: FontWeight.w600,
                                         ),
                                 ),
@@ -251,7 +281,7 @@ class CheckoutPage extends StatelessWidget {
                                 Text(
                                   'Refundable',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 12.sm,
                                     color: kPrimeryColor.withOpacity(0.4),
                                   ),
                                 ),
@@ -259,11 +289,11 @@ class CheckoutPage extends StatelessWidget {
                                   transaction.refundable ? "YES" : "NO",
                                   style: transaction.refundable
                                       ? defaultStyle.copyWith(
-                                          fontSize: 14,
+                                          fontSize: 14.sm,
                                           fontWeight: FontWeight.w600,
                                         )
                                       : secondaryStyle.copyWith(
-                                          fontSize: 14,
+                                          fontSize: 14.sm,
                                           fontWeight: FontWeight.w600,
                                         ),
                                 ),
@@ -271,8 +301,8 @@ class CheckoutPage extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 40,
+                        SizedBox(
+                          height: 20.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -283,7 +313,7 @@ class CheckoutPage extends StatelessWidget {
                                 Text(
                                   'Grand Total',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 12.sm,
                                     color: kPrimeryColor.withOpacity(0.4),
                                   ),
                                 ),
@@ -294,7 +324,7 @@ class CheckoutPage extends StatelessWidget {
                                     decimalDigits: 0,
                                   ).format(transaction.grandTotal),
                                   style: defaultStyle.copyWith(
-                                    fontSize: 14,
+                                    fontSize: 14.sm,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -306,14 +336,14 @@ class CheckoutPage extends StatelessWidget {
                                 Text(
                                   'VAT',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 12.sm,
                                     color: kPrimeryColor.withOpacity(0.4),
                                   ),
                                 ),
                                 Text(
                                   '${(transaction.vat * 100).toStringAsFixed(0)}%',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 14,
+                                    fontSize: 14.sm,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -325,14 +355,14 @@ class CheckoutPage extends StatelessWidget {
                                 Text(
                                   'Seat',
                                   style: defaultStyle.copyWith(
-                                    fontSize: 12,
+                                    fontSize: 12.sm,
                                     color: kPrimeryColor.withOpacity(0.4),
                                   ),
                                 ),
                                 Text(
                                   transaction.selectedSeat,
                                   style: defaultStyle.copyWith(
-                                    fontSize: 14,
+                                    fontSize: 14.sm,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -343,25 +373,23 @@ class CheckoutPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        height: 30,
-                        width: 15,
-                        decoration: const BoxDecoration(
+                        height: 30.h,
+                        width: 15.w,
+                        decoration: BoxDecoration(
                           color: kPrimeryColor,
                           borderRadius: BorderRadius.horizontal(
-                            right: Radius.circular(50),
+                            right: Radius.circular(50.r),
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 2.1,
-                        child: Image.asset('assets/line.png'),
+                      Expanded(
+                        child: SizedBox(
+                          child: Image.asset('assets/line.png'),
+                        ),
                       ),
                       Container(
                         height: 30,
@@ -375,9 +403,9 @@ class CheckoutPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
                   BlocConsumer<TransactionCubit, TransactionState>(
                     listener: (context, state) {
                       if (state is TransactionSuccess) {
@@ -409,6 +437,7 @@ class CheckoutPage extends StatelessWidget {
                           context
                               .read<TransactionCubit>()
                               .creatTransaction(transaction);
+                          context.read<SeatCubit>().state.clear();
                         },
                         child: Container(
                           height: 55,
@@ -437,13 +466,20 @@ class CheckoutPage extends StatelessWidget {
           ),
         );
 
+    Widget content() {
+      return Expanded(
+        child: Container(
+          child: informationContent(),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: kPrimeryColor,
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           flightStatus(),
-          informationContent(),
+          content(),
         ],
       ),
     );

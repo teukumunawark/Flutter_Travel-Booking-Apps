@@ -16,7 +16,6 @@ class AuthService {
       );
       UserModel user =
           await UserService().getUserById(userCredential.user!.uid);
-
       return user;
     } catch (e) {
       rethrow;

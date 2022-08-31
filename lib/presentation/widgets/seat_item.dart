@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_app/presentation/provider/seat_cubit.dart';
 
 import '../../common/constants.dart';
@@ -44,7 +45,7 @@ class SeatItem extends StatelessWidget {
           child: Text(
             'YOU',
             style: defaultStyle.copyWith(
-              fontSize: 11,
+              fontSize: 11.sm,
               fontWeight: semibold,
             ),
           ),
@@ -61,13 +62,13 @@ class SeatItem extends StatelessWidget {
         }
       },
       child: Container(
-        height: 40,
-        width: 35,
+        height: 35.h,
+        width: 30.w,
         decoration: BoxDecoration(
           color: backgroundColor(),
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(6.r),
           border: Border.all(
-            width: 2,
+            width: 2.w,
             color: borderColor(),
           ),
         ),

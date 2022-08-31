@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:travel_app/common/constants.dart';
 import 'package:travel_app/presentation/provider/auth_cubit.dart';
 
-class WalletPage extends StatelessWidget {
-  const WalletPage({Key? key}) : super(key: key);
+import '../../common/constants.dart';
+import '../widgets/costome_bottom.dart';
+
+class BonusPage extends StatelessWidget {
+  const BonusPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: kWhiteColor,
-        automaticallyImplyLeading: true,
-        toolbarHeight: 65,
-        title: Center(
-          child: Text(
-            'Your Wallet',
-            style:
-                blackStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-      body: Center(
+    Widget header() {
+      return const SizedBox(
+        height: 50,
+      );
+    }
+
+    Widget content() {
+      return Center(
         child: Container(
           height: 195,
-          width: MediaQuery.of(context).size.width * 0.8,
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
             boxShadow: [
@@ -40,23 +36,18 @@ class WalletPage extends StatelessWidget {
           ),
           child: Stack(
             children: [
-              Center(
-                child: Image.asset(
-                  'assets/card.png',
-                  fit: BoxFit.cover,
-                ),
+              Image.asset(
+                'assets/card.png',
+                fit: BoxFit.cover,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 20,
-                ),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: BlocBuilder<AuthCubit, AuthState>(
                   builder: (context, state) {
                     if (state is AuthSuccess) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Column(
                             children: [
@@ -233,7 +224,30 @@ class WalletPage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
+    }
+
+    Widget nextButtom() {
+      return CustomBottom(
+        borderRadius: BorderRadius.circular(defaultRadius),
+        margin: const EdgeInsets.only(left: 20, right: 20, bottom: 40),
+        title: 'Get Started',
+        textColor: kWhiteColor,
+        onPressed: () {
+          Navigator.pushNamedAndRemoveUntil(context, '/main', (route) => false);
+        },
+      );
+    }
+
+    return Scaffold(
+        body: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        header(),
+        content(),
+        nextButtom(),
+      ],
+    ));
   }
 }

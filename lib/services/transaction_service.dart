@@ -40,9 +40,10 @@ class TransactionService {
   }
 
   // Future<void> deleteItem() async {
-  //   DocumentReference documentReferencer =
-  //       _transactionReference.doc().collection('x').doc();
-
+  //   DocumentReference documentReferencer = _transactionReference
+  //       .doc('travel-app-e2218')
+  //       .collection('transactions')
+  //       .doc();
   //   await documentReferencer
   //       .delete()
   //       // ignore: avoid_print

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:travel_app/common/constants.dart';
 
 class CustomBottom extends StatelessWidget {
@@ -10,6 +11,7 @@ class CustomBottom extends StatelessWidget {
     required this.onPressed,
     this.margin = EdgeInsets.zero,
     this.textColor = kPrimeryColor,
+    required this.borderRadius,
   }) : super(key: key);
 
   final String title;
@@ -18,6 +20,7 @@ class CustomBottom extends StatelessWidget {
   final Function() onPressed;
   final EdgeInsets margin;
   final Color textColor;
+  final BorderRadius borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +33,13 @@ class CustomBottom extends StatelessWidget {
         style: TextButton.styleFrom(
           backgroundColor: color,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(defaultRadius),
+            borderRadius: borderRadius,
           ),
         ),
         child: Text(
           title,
           style: defaultStyle.copyWith(
-            fontSize: 14,
+            fontSize: 16.sm,
             color: textColor,
             fontWeight: FontWeight.bold,
           ),

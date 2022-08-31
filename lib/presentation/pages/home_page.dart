@@ -81,56 +81,6 @@ class _HomePageState extends State<HomePage> {
           },
         );
 
-    // Widget searchBar() => Padding(
-    //       padding: const EdgeInsets.symmetric(horizontal: 20),
-    //       child: Row(
-    //         crossAxisAlignment: CrossAxisAlignment.end,
-    //         children: [
-    //           Expanded(
-    //             child: Container(
-    //               height: 55,
-    //               margin: const EdgeInsets.only(top: 20),
-    //               padding: const EdgeInsets.only(
-    //                 left: 20,
-    //                 right: 20,
-    //               ),
-    //               decoration: BoxDecoration(
-    //                 color: kWhiteColor,
-    //                 borderRadius: BorderRadius.circular(12),
-    //               ),
-    //               child: Center(
-    //                 child: TextFormField(
-    //                   decoration: InputDecoration(
-    //                     border: InputBorder.none,
-    //                     hintText: 'Search for places....',
-    //                     hintStyle: greyStyle.copyWith(),
-    //                   ),
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //           const SizedBox(
-    //             width: 10,
-    //           ),
-    //           Container(
-    //             height: 55,
-    //             width: 55,
-    //             padding: const EdgeInsets.all(15),
-    //             decoration: BoxDecoration(
-    //               color: kPrimeryColor,
-    //               borderRadius: BorderRadius.circular(12),
-    //             ),
-    //             child: Center(
-    //               child: Image.asset(
-    //                 'assets/search_icon.png',
-    //                 color: kWhiteColor,
-    //               ),
-    //             ),
-    //           )
-    //         ],
-    //       ),
-    //     );
-
     Widget recomendedTag() => Padding(
           padding: const EdgeInsets.only(top: 25),
           child: Container(
@@ -157,7 +107,8 @@ class _HomePageState extends State<HomePage> {
           height: 300,
           child: SingleChildScrollView(
             physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
             scrollDirection: Axis.horizontal,
             child: Row(
               children: destination.map(

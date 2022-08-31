@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:travel_app/data/models/destination_model.dart';
 import 'package:travel_app/presentation/pages/detail_destination_page.dart';
@@ -16,7 +17,7 @@ class NewDestinationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 110,
       margin: const EdgeInsets.only(
         bottom: 10,
       ),
@@ -54,52 +55,57 @@ class NewDestinationCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          destinations.name,
-                          style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            color: kBlackColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          destinations.country,
-                          style: GoogleFonts.poppins(
-                            fontSize: 14,
-                            color: kGreyColor,
-                            fontWeight: FontWeight.w300,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Image.asset(
-                        'assets/rating_icon.png',
-                        width: 20,
-                        color: kSecondaryColor,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        destinations.rating.toString(),
-                        style: blackStyle.copyWith(
-                          fontSize: 18,
-                          fontWeight: semibold,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              destinations.name,
+                              style: GoogleFonts.poppins(
+                                fontSize: 17.sm,
+                                color: kBlackColor,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              destinations.country,
+                              style: GoogleFonts.poppins(
+                                fontSize: 14.sm,
+                                color: kGreyColor,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                      Row(
+                        children: [
+                          Image.asset(
+                            'assets/rating_icon.png',
+                            width: 20.h,
+                            color: kSecondaryColor,
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            destinations.rating.toString(),
+                            style: blackStyle.copyWith(
+                              fontSize: 18.sm,
+                              fontWeight: semibold,
+                            ),
+                          ),
+                        ],
+                      )
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

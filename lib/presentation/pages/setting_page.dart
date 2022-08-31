@@ -87,40 +87,6 @@ class SettingPage extends StatelessWidget {
       );
     }
 
-    Widget content() {
-      return Column(
-        children: [
-          Container(
-            height: 65,
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: kWhiteColor,
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-          Container(
-            height: 65,
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: kWhiteColor,
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-          Container(
-            height: 65,
-            margin: const EdgeInsets.only(left: 20, right: 20, top: 10),
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: kWhiteColor,
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-        ],
-      );
-    }
-
     Widget logout() {
       return BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
@@ -139,30 +105,43 @@ class SettingPage extends StatelessWidget {
         },
         builder: (context, state) {
           if (state is AuthLoading) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: kWhiteColor,
+            return Center(
+              child: Material(
+                color: kPrimeryColor,
+                borderRadius: BorderRadius.circular(30),
+                child: SizedBox(
+                  height: 55,
+                  width: MediaQuery.of(context).size.width,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: kWhiteColor,
+                    ),
+                  ),
+                ),
               ),
             );
           }
-          return InkWell(
-            onTap: () {
-              context.read<AuthCubit>().signOut();
-            },
-            child: Container(
-              height: 55,
-              margin: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: kPrimeryColor,
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Material(
+              color: kPrimeryColor,
+              borderRadius: BorderRadius.circular(30),
+              child: InkWell(
                 borderRadius: BorderRadius.circular(30),
-              ),
-              child: Center(
-                child: Text(
-                  'Log Out',
-                  style: whiteStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
+                onTap: () {
+                  context.read<AuthCubit>().signOut();
+                },
+                child: SizedBox(
+                  height: 55,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                    child: Text(
+                      'Log Out',
+                      style: whiteStyle.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -177,7 +156,6 @@ class SettingPage extends StatelessWidget {
       body: Column(
         children: [
           profileUser(),
-          content(),
           logout(),
         ],
       ),

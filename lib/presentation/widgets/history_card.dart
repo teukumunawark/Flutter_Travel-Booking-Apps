@@ -291,11 +291,12 @@ class HistoryCard extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 2.11,
-                child: Image.asset(
-                  'assets/line.png',
-                  color: kWhiteColor,
+              Expanded(
+                child: SizedBox(
+                  child: Image.asset(
+                    'assets/line.png',
+                    color: kWhiteColor,
+                  ),
                 ),
               ),
               Container(

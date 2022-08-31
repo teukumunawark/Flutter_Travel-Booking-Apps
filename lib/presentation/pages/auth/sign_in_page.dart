@@ -1,104 +1,61 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:travel_app/presentation/provider/auth_cubit.dart';
-import 'package:travel_app/presentation/widgets/costome_bottom.dart';
+import 'package:travel_app/presentation/widgets/text%20style%20widget/app_large_text.dart';
+import 'package:travel_app/presentation/widgets/text%20style%20widget/app_text.dart';
+import '../../../common/colors.dart';
+import '../../../common/constants.dart';
+import '../../provider/auth_cubit.dart';
+import '../../widgets/auth%20widgets/custome_form_email.dart';
+import '../../widgets/auth%20widgets/custome_form_password.dart';
+import '../../widgets/costome_bottom.dart';
 
-import '../../common/constants.dart';
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
-class LoginPage extends StatelessWidget {
-  LoginPage({Key? key}) : super(key: key);
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController(text: '');
+
   final TextEditingController passwordController =
       TextEditingController(text: '');
+
+  bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-
     Widget titleApp() => Padding(
           padding: const EdgeInsets.only(top: 85, left: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Let's Enjoy",
-                style: GoogleFonts.poppins(
-                  fontSize: 40,
-                  color: kWhiteColor,
-                  fontWeight: FontWeight.w800,
-                ),
+            children: const [
+              AppLargeText(
+                text: "Let's Enjoy",
+                size: 40,
+                color: AppColors.kWhiteColor,
+                fontWeight: FontWeight.w800,
               ),
-              Text(
-                'Find a place for travel, campaign, hiking, \nRelax and cherish your dreams to the fullest',
-                style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: kWhiteColor,
-                    fontWeight: FontWeight.w400),
+              AppText(
+                text:
+                    "Find a place for travel, campaign, hiking, \nRelax and cherish your dreams to the fullest",
+                size: 14,
+                color: AppColors.kWhiteColor,
               ),
             ],
           ),
         );
 
-    Widget emailInput() => Container(
-          height: 52,
-          width: width,
-          margin: const EdgeInsets.symmetric(vertical: 5),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          decoration: BoxDecoration(
-            color: kWhiteColor,
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: TextFormField(
-            controller: emailController,
-            keyboardType: TextInputType.emailAddress,
-            style: blackStyle.copyWith(fontSize: 14),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 15),
-              hintText: 'Your Email Address',
-              hintStyle: greyStyle.copyWith(
-                fontWeight: medium,
-                fontSize: 15,
-              ),
-              icon: const Icon(
-                Icons.email,
-              ),
-              border: InputBorder.none,
-            ),
-          ),
-        );
-    Widget passwordInput() => Container(
-          height: 52,
-          width: width,
-          margin: const EdgeInsets.symmetric(vertical: 5),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(
-            color: kWhiteColor,
-            borderRadius: BorderRadius.circular(14),
-          ),
-          child: TextFormField(
-            controller: passwordController,
-            keyboardType: TextInputType.emailAddress,
-            style: blackStyle.copyWith(fontSize: 14),
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 15),
-              hintText: 'Your password',
-              hintStyle: greyStyle.copyWith(
-                fontWeight: medium,
-                fontSize: 15,
-              ),
-              icon: const Icon(
-                Icons.lock,
-              ),
-              border: InputBorder.none,
-            ),
-          ),
-        );
+    Widget emailInput() => CustomeFormEmail(
+        title: 'your email', controller: emailController, icon: Icons.email);
+
+    Widget passwordInput() => CustomeFormPassword(
+        title: 'your password',
+        controller: passwordController,
+        icon: Icons.lock);
 
     Widget submitButton() => BlocConsumer<AuthCubit, AuthState>(
           listener: (context, state) {
@@ -106,12 +63,40 @@ class LoginPage extends StatelessWidget {
               Navigator.pushNamedAndRemoveUntil(
                   context, '/main', (route) => false);
             } else if (state is AuthFailed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.red,
-                  content: Text(state.error),
-                ),
-              );
+              if (state.error ==
+                  "[firebase_auth/unknown] Given String is empty or null") {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.red,
+                    content: AppText(
+                      text: 'Form harus diisi',
+                      color: AppColors.kWhiteColor,
+                    ),
+                  ),
+                );
+              } else if (state.error ==
+                  "[firebase_auth/wrong-password] The password is invalid or the user does not have a password.") {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.red,
+                    content: AppText(
+                      text: 'Password yang anda masukkan salah',
+                      color: AppColors.kWhiteColor,
+                    ),
+                  ),
+                );
+              } else if (state.error ==
+                  "[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.") {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Colors.red,
+                    content: AppText(
+                      text: 'Email yang anda masukkan tidak ditemukan/salahmun',
+                      color: AppColors.kWhiteColor,
+                    ),
+                  ),
+                );
+              }
             }
           },
           builder: (context, state) {
@@ -121,8 +106,8 @@ class LoginPage extends StatelessWidget {
                 width: double.infinity,
                 margin: const EdgeInsets.only(bottom: 10, top: 30),
                 decoration: BoxDecoration(
-                  color: kPrimeryColor,
-                  borderRadius: BorderRadius.circular(defaultRadius),
+                  color: AppColors.kPrimeryColor,
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: const Center(
                   child: CircularProgressIndicator(),
@@ -131,7 +116,8 @@ class LoginPage extends StatelessWidget {
             }
             return CustomBottom(
               title: 'Login',
-              textColor: kWhiteColor,
+              borderRadius: BorderRadius.circular(defaultRadius),
+              textColor: AppColors.kWhiteColor,
               margin: const EdgeInsets.only(bottom: 10, top: 30),
               onPressed: () {
                 context.read<AuthCubit>().signIn(
@@ -146,19 +132,18 @@ class LoginPage extends StatelessWidget {
     Widget registerTextButtom() => Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Don’t have an account yet?",
-              style: whiteStyle.copyWith(),
+            const AppText(
+              text: "Don’t have an account yet?",
+              color: AppColors.kWhiteColor,
             ),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
               },
-              child: Text(
-                "Register",
-                style: defaultStyle.copyWith(
-                  fontWeight: semibold,
-                ),
+              child: const AppText(
+                text: 'Register',
+                color: AppColors.kPrimeryColor,
+                fontWeight: FontWeight.w700,
               ),
             ),
           ],
