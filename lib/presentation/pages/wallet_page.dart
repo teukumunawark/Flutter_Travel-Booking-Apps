@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:travel_app/common/constants.dart';
 import 'package:travel_app/presentation/provider/auth_cubit.dart';
@@ -18,8 +19,8 @@ class WalletPage extends StatelessWidget {
         title: Center(
           child: Text(
             'Your Wallet',
-            style:
-                blackStyle.copyWith(fontSize: 18, fontWeight: FontWeight.bold),
+            style: blackStyle.copyWith(
+                fontSize: 18.sm, fontWeight: FontWeight.bold),
           ),
         ),
       ),
@@ -75,7 +76,7 @@ class WalletPage extends StatelessWidget {
                                       Text(
                                         'CARD SALDO',
                                         style: whiteStyle.copyWith(
-                                          fontSize: 14,
+                                          fontSize: 14.sm,
                                         ),
                                       ),
                                       Text(
@@ -85,7 +86,7 @@ class WalletPage extends StatelessWidget {
                                           decimalDigits: 0,
                                         ).format(state.user.balance),
                                         style: whiteStyle.copyWith(
-                                          fontSize: 18,
+                                          fontSize: 18.sm,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
@@ -108,13 +109,13 @@ class WalletPage extends StatelessWidget {
                                   Text(
                                     'CARD HOLDERNAME',
                                     style: whiteStyle.copyWith(
-                                      fontSize: 14,
+                                      fontSize: 14.sm,
                                     ),
                                   ),
                                   Text(
                                     state.user.name.toUpperCase(),
                                     style: whiteStyle.copyWith(
-                                      fontSize: 18,
+                                      fontSize: 18.sm,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -126,13 +127,13 @@ class WalletPage extends StatelessWidget {
                                   Text(
                                     'EXPIRY DATE',
                                     style: whiteStyle.copyWith(
-                                      fontSize: 14,
+                                      fontSize: 14.sm,
                                     ),
                                   ),
                                   Text(
                                     '20-04-2025',
                                     style: whiteStyle.copyWith(
-                                      fontSize: 18,
+                                      fontSize: 18.sm,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -163,13 +164,13 @@ class WalletPage extends StatelessWidget {
                                       Text(
                                         'CARD SALDO',
                                         style: whiteStyle.copyWith(
-                                          fontSize: 14,
+                                          fontSize: 14.sm,
                                         ),
                                       ),
                                       Text(
                                         '**** **** ****',
                                         style: whiteStyle.copyWith(
-                                          fontSize: 18,
+                                          fontSize: 18.sm,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),

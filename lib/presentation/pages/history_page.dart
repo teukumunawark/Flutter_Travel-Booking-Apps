@@ -28,17 +28,6 @@ class _HistoryPageState extends State<HistoryPage> {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: true,
         toolbarHeight: 65,
-        // actions: [
-        //   IconButton(
-        //     onPressed: () {
-        //       context.read<TransactionService>().deleteItem();
-        //     },
-        //     icon: const Icon(
-        //       Icons.delete,
-        //       color: AppColors.kPrimeryColor,
-        //     ),
-        //   ),
-        // ],
         title: Center(
           child: Text(
             'Transaction History',

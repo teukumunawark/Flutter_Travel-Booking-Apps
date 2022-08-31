@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:travel_app/data/models/transaction_model.dart';
 import 'package:travel_app/presentation/provider/auth_cubit.dart';
@@ -55,7 +56,7 @@ class HistoryCard extends StatelessWidget {
                           return Text(
                             state.user.name.toUpperCase(),
                             style: whiteStyle.copyWith(
-                              fontSize: 24,
+                              fontSize: 24.sm,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -63,7 +64,7 @@ class HistoryCard extends StatelessWidget {
                           return Text(
                             'Anonymous',
                             style: whiteStyle.copyWith(
-                              fontSize: 24,
+                              fontSize: 24.sm,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -90,15 +91,19 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           'Airport',
                           style: whiteStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sm,
                             color: kWhiteColor.withOpacity(0.4),
                           ),
                         ),
-                        Text(
-                          transaction.airportName,
-                          style: whiteStyle.copyWith(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: Text(
+                            transaction.airportName,
+                            style: whiteStyle.copyWith(
+                              fontSize: 11.sm,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
@@ -109,14 +114,15 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           'Traveler',
                           style: whiteStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sm,
                             color: kWhiteColor.withOpacity(0.4),
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           '${transaction.amountOfTravel} Person',
                           style: whiteStyle.copyWith(
-                            fontSize: 14,
+                            fontSize: 14.sm,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -136,7 +142,7 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           'Price',
                           style: whiteStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sm,
                             color: kWhiteColor.withOpacity(0.4),
                           ),
                         ),
@@ -147,7 +153,7 @@ class HistoryCard extends StatelessWidget {
                             decimalDigits: 0,
                           ).format(transaction.price),
                           style: whiteStyle.copyWith(
-                            fontSize: 14,
+                            fontSize: 14.sm,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -159,7 +165,7 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           'Insurance',
                           style: whiteStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sm,
                             color: kWhiteColor.withOpacity(0.4),
                           ),
                         ),
@@ -183,7 +189,7 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           'Refundable',
                           style: whiteStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sm,
                             color: kWhiteColor.withOpacity(0.4),
                           ),
                         ),
@@ -191,11 +197,11 @@ class HistoryCard extends StatelessWidget {
                           transaction.refundable ? "YES" : "NO",
                           style: transaction.refundable
                               ? whiteStyle.copyWith(
-                                  fontSize: 14,
+                                  fontSize: 14.sm,
                                   fontWeight: FontWeight.w600,
                                 )
                               : secondaryStyle.copyWith(
-                                  fontSize: 14,
+                                  fontSize: 14.sm,
                                   fontWeight: FontWeight.w600,
                                 ),
                         ),
@@ -215,7 +221,7 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           'Grand Total',
                           style: whiteStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sm,
                             color: kWhiteColor.withOpacity(0.4),
                           ),
                         ),
@@ -226,7 +232,7 @@ class HistoryCard extends StatelessWidget {
                             decimalDigits: 0,
                           ).format(transaction.grandTotal),
                           style: whiteStyle.copyWith(
-                            fontSize: 14,
+                            fontSize: 14.sm,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -238,14 +244,14 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           'VAT',
                           style: whiteStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sm,
                             color: kWhiteColor.withOpacity(0.4),
                           ),
                         ),
                         Text(
                           '${(transaction.vat * 100).toStringAsFixed(0)}%',
                           style: whiteStyle.copyWith(
-                            fontSize: 14,
+                            fontSize: 14.sm,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -257,14 +263,14 @@ class HistoryCard extends StatelessWidget {
                         Text(
                           'Seat',
                           style: whiteStyle.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sm,
                             color: kWhiteColor.withOpacity(0.4),
                           ),
                         ),
                         Text(
                           transaction.selectedSeat,
                           style: whiteStyle.copyWith(
-                            fontSize: 14,
+                            fontSize: 14.sm,
                             fontWeight: FontWeight.w600,
                           ),
                         ),

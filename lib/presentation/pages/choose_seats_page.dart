@@ -467,14 +467,14 @@ class ChooseSeatPage extends StatelessWidget {
                                     Text(
                                       'From',
                                       style: secondaryStyle.copyWith(
-                                        fontSize: 22.sp,
+                                        fontSize: 22.sm,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
                                     Text(
                                       'Banda Aceh',
                                       style: whiteStyle.copyWith(
-                                        fontSize: 14.sp,
+                                        fontSize: 14.sm,
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
@@ -502,7 +502,7 @@ class ChooseSeatPage extends StatelessWidget {
                                     Text(
                                       'To',
                                       style: secondaryStyle.copyWith(
-                                        fontSize: 22,
+                                        fontSize: 22.sm,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -523,7 +523,7 @@ class ChooseSeatPage extends StatelessWidget {
                                         Text(
                                           state.join(', '),
                                           style: secondaryStyle.copyWith(
-                                            fontSize: 25,
+                                            fontSize: 25.sm,
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
@@ -548,7 +548,9 @@ class ChooseSeatPage extends StatelessWidget {
                                       ).format(
                                           state.length * destination.price),
                                       style: secondaryStyle.copyWith(
-                                          fontWeight: semibold, fontSize: 16),
+                                        fontWeight: semibold,
+                                        fontSize: 16.sm,
+                                      ),
                                     ),
                                     Text(
                                       'Ticket Price',

@@ -38,17 +38,4 @@ class TransactionService {
       rethrow;
     }
   }
-
-  // Future<void> deleteItem() async {
-  //   DocumentReference documentReferencer = _transactionReference
-  //       .doc('travel-app-e2218')
-  //       .collection('transactions')
-  //       .doc();
-  //   await documentReferencer
-  //       .delete()
-  //       // ignore: avoid_print
-  //       .whenComplete(() => print('Note item deleted from the database'))
-  //       // ignore: avoid_print
-  //       .catchError((e) => print(e));
-  // }
 }
